@@ -1,0 +1,13 @@
+# Database (contains your price history — don't commit it)
+*.db
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Editors
+.vscode/
+*.swp
