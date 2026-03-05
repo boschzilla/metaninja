@@ -261,6 +261,12 @@ class TrendApp:
             command=self._reload,
         ).pack(side="left", padx=(8, 0))
 
+        tk.Button(
+            top, text="🗑 Delete History", bg="#6a2a2a", fg=FG,
+            font=FONT_MONO, relief="flat", cursor="hand2",
+            command=self._delete_history,
+        ).pack(side="left", padx=(8, 0))
+
         self._status_var = tk.StringVar(value="Ready")
         tk.Label(
             top, textvariable=self._status_var,
@@ -624,6 +630,20 @@ class TrendApp:
         if current not in leagues and leagues:
             self._league_var.set(leagues[0])
         self._status_var.set("Ready")
+
+    # ── Delete history ─────────────────────────────────────────────────────
+
+    def _delete_history(self) -> None:
+        from tkinter import messagebox
+        if not messagebox.askyesno(
+            "Delete History",
+            "Delete ALL price history from the database?\nThis cannot be undone.",
+            icon="warning",
+        ):
+            return
+        n = price_db.delete_all_history()
+        self._status_var.set(f"Deleted {n} row(s)")
+        self._refresh_tables()
 
     # ── Reload ─────────────────────────────────────────────────────────────
 

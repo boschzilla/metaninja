@@ -181,3 +181,11 @@ def get_risers(min_snaps: int = 2, limit: int = 100) -> list[dict]:
 def get_fallers(min_snaps: int = 2, limit: int = 100) -> list[dict]:
     """Items with the largest negative % change."""
     return _query_trend("WHERE pct_change < 0", "pct_change ASC", min_snaps, limit)
+
+
+def delete_all_history() -> int:
+    """Delete all rows from price_history. Returns the number of rows deleted."""
+    with _conn() as c:
+        n = c.execute("SELECT COUNT(*) FROM price_history").fetchone()[0]
+        c.execute("DELETE FROM price_history")
+    return n

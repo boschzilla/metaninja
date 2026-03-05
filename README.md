@@ -43,6 +43,7 @@ python trend_watcher.py --league "Settlers"
 | **Auto** + interval | Automatically fetch every N hours |
 | **↺ Refresh** | Reload the tables from the local database without fetching |
 | **⟳ Reload** | Restart the app (picks up any code changes) |
+| **🗑 Delete History** | Delete all price history from the database (prompts for confirmation) |
 
 ### Tabs
 
